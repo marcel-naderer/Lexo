@@ -1,0 +1,22 @@
+# Syntax highlighting for Lexo Arduino library
+
+#######################################
+# Class
+#######################################
+Lexo	KEYWORD1
+
+#######################################
+# Functions
+#######################################
+begin	KEYWORD2
+readBatteryVoltage	KEYWORD2
+readMotorCurrent	KEYWORD2
+readIMU	KEYWORD2
+readForceSensor	KEYWORD2
+readEMG	KEYWORD2
+readButton	KEYWORD2
+readMotorAngle	KEYWORD2
+setMotor	KEYWORD2
+setBuzzer	KEYWORD2
+setRGB	KEYWORD2
+setVibration	KEYWORD2
