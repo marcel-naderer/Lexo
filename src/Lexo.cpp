@@ -12,11 +12,13 @@ void Lexo::begin(LexoConfig config) {
     inaMotor.begin();
     inaBattery.begin();
 
-    for (int i = 0; i < 3; i++) {
-        pinMode(pins.buttonPins[i], INPUT_PULLUP);
-        pinMode(pins.vibPins[i], OUTPUT);
-    }
 
+    pinMode(pins.buttonPins[1], INPUT_PULLUP);
+    pinMode(pins.vibPins[1], OUTPUT);	
+    pinMode(pins.buttonPins[2], INPUT_PULLUP);
+    pinMode(pins.vibPins[2], OUTPUT);	
+    pinMode(pins.buttonPins[3], INPUT_PULLUP);
+    pinMode(pins.emgPin, INPUT);	
     pinMode(pins.ledR, OUTPUT);
     pinMode(pins.ledG, OUTPUT);
     pinMode(pins.ledB, OUTPUT);
@@ -33,10 +35,7 @@ float Lexo::readMotorCurrent() {
     return inaMotor.getCurrent_mA();
 }
 
-void Lexo::readIMU(float &x, float &y, float &z) {
-    // Placeholder for IMU code
-    x = y = z = 0;
-}
+
 
 int Lexo::readForceSensor(uint8_t index) {
     if (index >= 2) return -1;
@@ -63,13 +62,13 @@ void Lexo::setBuzzer(bool on) {
 }
 
 void Lexo::setRGB(uint8_t r, uint8_t g, uint8_t b) {
-    analogWrite(pins.ledR, r);
-    analogWrite(pins.ledG, g);
-    analogWrite(pins.ledB, b);
+    analogWrite(pins.ledR, !r);
+    analogWrite(pins.ledG, !g);
+    analogWrite(pins.ledB, !b);
 }
 
 void Lexo::setVibration(uint8_t index, bool on) {
-    if (index >= 3) return;
+    if (index >= 2) return;
     digitalWrite(pins.vibPins[index], on);
 }
 
