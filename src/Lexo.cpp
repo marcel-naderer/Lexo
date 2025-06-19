@@ -72,15 +72,6 @@ void Lexo::setVibration(uint8_t index, bool on) {
     digitalWrite(pins.vibPins[index], on);
 }
 
-int Lexo::readMotorAngle() {
-    Wire.beginTransmission(0x36); // AS5600 default address
-    Wire.write(0x0E); // Angle register MSB
-    Wire.endTransmission();
-    Wire.requestFrom(0x36, 2);
-    if (Wire.available() == 2) {
-        int high = Wire.read();
-        int low = Wire.read();
-        return ((high & 0x0F) << 8) | low; // 12-bit angle
-    }
+
     return -1;
 }
