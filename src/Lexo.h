@@ -17,7 +17,7 @@ public:
     int readForceSensor(uint8_t index);
     int readEMG();
     bool readButton(uint8_t index);
-    int readMotorAngle(); // AS5600
+
 
     // Actuator control
     void setMotor(int speed); // speed: -255 to 255
@@ -28,7 +28,7 @@ public:
 private:
     LexoConfig pins;
     Adafruit_INA219 inaMotor, inaBattery;
-    int readAS5600();
+
 };
 
 #endif
