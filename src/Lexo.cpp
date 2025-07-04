@@ -71,6 +71,40 @@ void Lexo::setVibration(uint8_t index, bool on) {
     if (index >= 2) return;
     digitalWrite(pins.vibPins[index], on);
 }
+void Lexo::setupPID(float kp, float ki, float kd, float uMin, float uMax) {
+    _kp = kp;
+    _ki = ki;
+    _kd = kd;
+    _pid_integral = 0;
+    _pid_prev_error = 0;
+    _pid_uMin = uMin;
+    _pid_uMax = uMax;
+}
+
+void Lexo::resetPID() {
+    _pid_integral = 0;
+    _pid_prev_error = 0;
+}
+
+float Lexo::positionControlPID(float target, float actVal) {
+    float error = target - actVal;
+    float derivative = error - _pid_prev_error;
+    
+
+    // Anti-windup: only integrate when within limits
+    if (output < _pid_uMax && output > _pid_uMin) {
+        _pid_integral += error;
+    }
+
+    float output = _kp * error + _ki * _pid_integral + _kd * derivative;
+
+    // Saturate output
+    if (output > _pid_uMax) output = _pid_uMax;
+    if (output < _pid_uMin) output = _pid_uMin;
+
+    _pid_prev_error = error;
+    return output;
+}
 
 
     return -1;
