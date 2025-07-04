@@ -19,15 +19,25 @@ public:
     bool readButton(uint8_t index);
 
 
+
     // Actuator control
     void setMotor(int speed); // speed: -255 to 255
     void setBuzzer(bool on);
     void setRGB(uint8_t r, uint8_t g, uint8_t b);
     void setVibration(uint8_t index, bool on);
 
+    // Motor Controller 
+    void setupPID(float kp, float ki, float kd, float uMin = -255, float uMax = 255);
+    void resetPID();
+    float positionControlPID(float target, float current);
+
 private:
     LexoConfig pins;
     Adafruit_INA219 inaMotor, inaBattery;
+    float _kp, _ki, _kd;
+    float _pid_integral;
+    float _pid_prev_error;
+    float _pid_uMin, _pid_uMax;
 
 };
 
