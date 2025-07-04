@@ -86,7 +86,7 @@ void Lexo::resetPID() {
     _pid_prev_error = 0;
 }
 
-float Lexo::positionControlPID(float target, float actVal) {
+float Lexo::LexoPID(float target, float actVal) {
     float error = target - actVal;
     float derivative = error - _pid_prev_error;
     
