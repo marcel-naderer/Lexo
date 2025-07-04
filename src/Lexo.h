@@ -29,7 +29,7 @@ public:
     // Motor Controller 
     void setupPID(float kp, float ki, float kd, float uMin = -255, float uMax = 255);
     void resetPID();
-    float positionControlPID(float target, float current);
+    float LexoPID(float target, float current);
 
 private:
     LexoConfig pins;
